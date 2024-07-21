@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>英語填空題遊戲</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .answer {
+            display: block;
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        .answer.correct {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .answer.wrong {
+            background-color: #F44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>英語填空題遊戲</h1>
+    <div id="quiz"></div>
+
+    <script>
+        const questions = [
+            {
+                question: "Suddenly, a _____ of dogs ran toward the fox and the cat.",
+                answers: ["group", "pack", "herd", "swarm"],
+                correct: 1
+            },
+            {
+                question: "_____, the cat ran up a tree and hid behind some leaves.",
+                answers: ["Slowly", "Silently", "Quickly", "Carefully"],
+                correct: 2
+            },
+            {
+                question: "The cat ran up a tree and _____ behind some leaves.",
+                answers: ["jumped", "slept", "hid", "stayed"],
+                correct: 2
+            },
+            {
+                question: "\"This is my way to _____,\" he said.",
+                answers: ["hide", "escape", "jump", "play"],
+                correct: 1
+            },
+            {
+                question: "The fox _____ about one way and then another.",
+                answers: ["talked", "thought", "asked", "wondered"],
+                correct: 1
+            },
+            {
+                question: "Some ways _____ look good to the cat.",
+                answers: ["may", "should", "must", "might"],
+                correct: 3
+            },
+            {
+                question: "The hunters and the dogs quickly _____ the fox.",
+                answers: ["killed", "caught", "found", "lost"],
+                correct: 1
+            },
+            {
+                question: "The hunters and the dogs quickly _____ the fox.",
+                answers: ["saved", "chased", "caught", "killed"],
+                correct: 3
+            },
+            {
+                question: "The _____ thought, \"Sometimes one is better than many.\"",
+                answers: ["dog", "cat", "fox", "hunter"],
+                correct: 1
+            },
+            {
+                question: "The fox looked _____ at the cat.",
+                answers: ["proudly", "angrily", "quietly", "sadly"],
+                correct: 0
+            },
+            {
+                question: "One day, a fox and a cat were talking. The fox was very _____. \"I am very sly,\" he said.",
+                answers: ["happy", "sad", "proud", "angry"],
+                correct: 2
+            },
+            {
+                question: "The cat said _____, \"I have only one way, but that is usually enough.\"",
+                answers: ["loudly", "quickly", "quietly", "angrily"],
+                correct: 2
+            },
+            {
+                question: "The noise became _____ and louder.",
+                answers: ["quieter", "softer", "clearer", "louder"],
+                correct: 3
+            },
+            {
+                question: "The fox said, \"I have a whole _____ of tricks.\"",
+                answers: ["pack", "bag", "box", "group"],
+                correct: 1
+            },
+            {
+                question: "The fox said, \"No one can _____ me.\"",
+                answers: ["help", "see", "catch", "hear"],
+                correct: 2
+            },
+            {
+                question: "\"I know a _____ ways to escape from dogs and people.\"",
+                answers: ["few", "hundred", "several", "dozen"],
+                correct: 1
+            },
+            {
+                question: "The fox looked proudly at the _____. \"How about you?\"",
+                answers: ["dog", "hunter", "tree", "cat"],
+                correct: 3
+            },
+            {
+                question: "The cat heard a _____. It became louder and louder.",
+                answers: ["noise", "shout", "whisper", "song"],
+                correct: 0
+            },
+            {
+                question: "The fox and the cat _____ at each other.",
+                answers: ["laughed", "yelled", "looked", "waved"],
+                correct: 2
+            },
+            {
+                question: "\"I have a whole bag of _____.\"",
+                answers: ["toys", "tricks", "books", "food"],
+                correct: 1
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function loadQuestion() {
+            const quizDiv = document.getElementById("quiz");
+            quizDiv.innerHTML = "";
+            const question = questions[currentQuestion];
+            const questionDiv = document.createElement("div");
+            questionDiv.className = "question";
+            questionDiv.innerText = question.question;
+            quizDiv.appendChild(questionDiv);
+
+            question.answers.forEach((answer, index) => {
+                const answerDiv = document.createElement("div");
+                answerDiv.className = "answer";
+                answerDiv.innerText = answer;
+                answerDiv.addEventListener("click", () => {
+                    if (index === question.correct) {
+                        answerDiv.classList.add("correct");
+                        setTimeout(() => {
+                            currentQuestion++;
+                            if (currentQuestion < questions.length) {
+                                loadQuestion();
+                            } else {
+                                quizDiv.innerHTML = "<h2>恭喜你完成所有題目！</h2>";
+                            }
+                        }, 1000);
+                    } else {
+                        answerDiv.classList.add("wrong");
+                    }
+                });
+                quizDiv.appendChild(answerDiv);
+            });
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
+"""
+
+# Save the updated HTML content to a file
+file_path_correct = "/mnt/data/english_quiz_game_correct.html"
+with open(file_path_correct, "w") as file:
+    file.write(html_content)
+
+file_path_correct
